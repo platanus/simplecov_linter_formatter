@@ -47,9 +47,9 @@ describe SimpleCovLinterFormatter::SourceFileTextFormatter do
 
   let(:expected_lines) do
     [
-      "file.rb:1:1:covered",
-      "file.rb:2:1:never",
-      "file.rb:5:1:missed"
+      "file.rb:1:1:covered-3",
+      "file.rb:2:1:never-3",
+      "file.rb:5:1:missed-3"
     ]
   end
 

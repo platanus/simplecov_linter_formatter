@@ -19,8 +19,12 @@ module SimpleCovLinterFormatter
         @source_file.filename,
         line.line_number,
         FILE_COLUMN,
-        line.status
+        "#{line.status}-#{lines_count}",
       ].map(&:to_s).join(":")
+    end
+
+    def lines_count
+      @lines_count ||= lines.count
     end
 
     def lines
