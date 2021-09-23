@@ -1,7 +1,7 @@
 require "spec_helper"
 
-describe SimplecovLinterFormatter do
+describe SimpleCovLinterFormatter do
   it "has a version number" do
-    expect(SimplecovLinterFormatter::VERSION).not_to be nil
+    expect(SimpleCovLinterFormatter::VERSION).not_to be nil
   end
 end
