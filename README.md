@@ -7,14 +7,11 @@ Linter formatter for SimpleCov code coverage tool
 
 ## Installation
 
-```bash
-$ gem install simplecov_linter_formatter
-```
-
-Or add to your Gemfile:
+Add to your Gemfile:
 
 ```ruby
-gem "simplecov_linter_formatter"
+gem 'simplecov'
+gem 'simplecov_linter_formatter'
 ```
 
 ```bash
@@ -33,7 +30,7 @@ To run the specs you need to execute, **in the root path of the gem**, the follo
 bundle exec guard
 ```
 
-You need to put **all your tests** in the `/my_gem/spec/` directory.
+You need to put **all your tests** in the `/simplecov_linter_formatter/spec/` directory.
 
 ## Publishing
 
