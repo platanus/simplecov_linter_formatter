@@ -13,6 +13,8 @@ module SimpleCovLinterFormatter
       }
     end
 
+    private
+
     def group_lines_by_file
       result = {}
 
