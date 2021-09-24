@@ -28,4 +28,14 @@ describe SimpleCovLinterFormatter::TextResultExporter do
   after { delete_coverage_file }
 
   it { expect(coverage_file_content).to eq("line1\nline2") }
+
+  context "with different file name" do
+    let(:coverage_file_path) { "./tmp/custom.txt" }
+
+    before do
+      SimpleCovLinterFormatter.txt_filename = "custom.txt"
+    end
+
+    it { expect(coverage_file_content).to eq("line1\nline2") }
+  end
 end

@@ -13,7 +13,7 @@ module SimpleCovLinterFormatter
     private
 
     def export_path
-      File.join(SimpleCov.coverage_path, SimpleCovLinterFormatter::FILENAME)
+      File.join(SimpleCov.coverage_path, SimpleCovLinterFormatter.txt_filename)
     end
   end
 end

@@ -1,7 +1,5 @@
 module SimpleCovLinterFormatter
   class JsonResultExporter
-    FILENAME = 'coverage.linter.json'
-
     def initialize(result_hash)
       @result = result_hash
     end
@@ -19,7 +17,7 @@ module SimpleCovLinterFormatter
     end
 
     def export_path
-      File.join(SimpleCov.coverage_path, FILENAME)
+      File.join(SimpleCov.coverage_path, SimpleCovLinterFormatter.json_filename)
     end
   end
 end

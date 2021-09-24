@@ -6,7 +6,21 @@ require 'simplecov_linter_formatter/exporters/text_result_exporter'
 require 'simplecov_linter_formatter/exporters/json_result_exporter'
 
 module SimpleCovLinterFormatter
-  FILENAME = 'coverage.linter.txt'
+  def self.json_filename=(value)
+    @json_filename = value
+  end
+
+  def self.json_filename
+    @json_filename || 'coverage.linter.json'
+  end
+
+  def self.txt_filename=(value)
+    @txt_filename = value
+  end
+
+  def self.txt_filename
+    @txt_filename || 'coverage.linter.txt'
+  end
 end
 
 module SimpleCov

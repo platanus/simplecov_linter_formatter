@@ -27,4 +27,14 @@ describe SimpleCovLinterFormatter::JsonResultExporter do
   after { delete_coverage_file }
 
   it { expect(file_content).to eq("{\n  \"odio\": \"la casa de papel\"\n}") }
+
+  context "with different file name" do
+    let(:coverage_file_path) { "./tmp/custom.json" }
+
+    before do
+      SimpleCovLinterFormatter.json_filename = "custom.json"
+    end
+
+    it { expect(file_content).to eq("{\n  \"odio\": \"la casa de papel\"\n}") }
+  end
 end
