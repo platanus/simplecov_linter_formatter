@@ -10,7 +10,6 @@ describe SimpleCov::Formatter::LinterFormatter do
   let(:result_formatter) { double(format: text_lines) }
   let(:text_lines_formatter) { double(format: hash_result) }
   let(:json_result_exporter) { double(export: true) }
-  let(:text_result_exporter) { double(export: true) }
   let(:text_lines_filter) { double(filter: filtered_text_lines) }
 
   def format
@@ -26,9 +25,6 @@ describe SimpleCov::Formatter::LinterFormatter do
 
     allow(SimpleCovLinterFormatter::JsonResultExporter)
       .to receive(:new).and_return(json_result_exporter)
-
-    allow(SimpleCovLinterFormatter::TextResultExporter)
-      .to receive(:new).and_return(text_result_exporter)
 
     allow(SimpleCovLinterFormatter::TextLinesFilter)
       .to receive(:new).and_return(text_lines_filter)
@@ -48,7 +44,6 @@ describe SimpleCov::Formatter::LinterFormatter do
     expect(SimpleCovLinterFormatter::JsonResultExporter).to have_received(:new)
       .with(hash_result).once
 
-    expect(SimpleCovLinterFormatter::TextResultExporter).not_to have_received(:new)
     expect(SimpleCovLinterFormatter::TextLinesFilter).not_to have_received(:new)
   end
 
@@ -57,7 +52,6 @@ describe SimpleCov::Formatter::LinterFormatter do
     expect(result_formatter).to have_received(:format).with(no_args).once
     expect(text_lines_formatter).to have_received(:format).with(no_args).once
     expect(json_result_exporter).to have_received(:export).with(no_args).once
-    expect(text_result_exporter).not_to have_received(:export)
     expect(text_lines_filter).not_to have_received(:filter)
   end
 
@@ -72,11 +66,8 @@ describe SimpleCov::Formatter::LinterFormatter do
       expect(SimpleCovLinterFormatter::ResultFormatter).to have_received(:new)
         .with(simplecov_result).once
 
-      expect(SimpleCovLinterFormatter::TextResultExporter).to have_received(:new)
-        .with(text_lines).once
-
       expect(SimpleCovLinterFormatter::TextLinesFilter).to have_received(:new)
-        .with(no_args).once
+        .with(text_lines).once
 
       expect(SimpleCovLinterFormatter::TextLinesFormatter).to have_received(:new)
         .with(command_name, filtered_text_lines).once
@@ -90,7 +81,6 @@ describe SimpleCov::Formatter::LinterFormatter do
       expect(result_formatter).to have_received(:format).with(no_args).once
       expect(text_lines_formatter).to have_received(:format).with(no_args).once
       expect(json_result_exporter).to have_received(:export).with(no_args).once
-      expect(text_result_exporter).to have_received(:export).with(no_args).once
       expect(text_lines_filter).to have_received(:filter).with(no_args).once
     end
   end
