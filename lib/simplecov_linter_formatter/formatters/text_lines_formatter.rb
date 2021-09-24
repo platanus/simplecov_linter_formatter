@@ -1,12 +1,13 @@
 module SimpleCovLinterFormatter
   class TextLinesFormatter
-    def initialize(lines)
+    def initialize(command_name, lines)
+      @command_name = command_name
       @lines = lines
     end
 
     def format
       {
-        RSpec: {
+        @command_name.to_sym => {
           coverage: group_lines_by_file
         }
       }

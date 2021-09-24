@@ -1,7 +1,8 @@
 require "spec_helper"
 
 describe SimpleCov::Formatter::LinterFormatter do
-  let(:simplecov_result) { double }
+  let(:command_name) { "RSpec" }
+  let(:simplecov_result) { double(command_name: command_name) }
   let(:text_lines) { double }
   let(:hash_result) { double }
 
@@ -33,7 +34,7 @@ describe SimpleCov::Formatter::LinterFormatter do
       .with(simplecov_result).once
 
     expect(SimpleCovLinterFormatter::TextLinesFormatter).to have_received(:new)
-      .with(text_lines).once
+      .with(command_name, text_lines).once
 
     expect(SimpleCovLinterFormatter::JsonResultExporter).to have_received(:new)
       .with(hash_result).once

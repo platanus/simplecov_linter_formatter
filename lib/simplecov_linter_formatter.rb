@@ -14,7 +14,7 @@ module SimpleCov
     class LinterFormatter
       def format(simplecov_result)
         text_lines = format_result(simplecov_result)
-        hash_result = format_text_lines(text_lines)
+        hash_result = format_text_lines(simplecov_result.command_name, text_lines)
         export_to_json(hash_result)
         nil
       end
@@ -25,8 +25,8 @@ module SimpleCov
         SimpleCovLinterFormatter::ResultFormatter.new(simplecov_result).format
       end
 
-      def format_text_lines(text_lines)
-        SimpleCovLinterFormatter::TextLinesFormatter.new(text_lines).format
+      def format_text_lines(command_name, text_lines)
+        SimpleCovLinterFormatter::TextLinesFormatter.new(command_name, text_lines).format
       end
 
       def export_to_json(hash_result)
