@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe SimpleCovLinterFormatter::TextLinesConverter do
+describe SimpleCovLinterFormatter::TextLinesFormatter do
   let(:lines) do
     [
       "file1.rb:1:1:missed-2",
@@ -12,7 +12,7 @@ describe SimpleCovLinterFormatter::TextLinesConverter do
   end
 
   def result
-    described_class.new(lines).convert[:RSpec][:coverage]
+    described_class.new(lines).format[:RSpec][:coverage]
   end
 
   it { expect(result).to be_a(Hash) }

@@ -1,9 +1,9 @@
 require 'simplecov_linter_formatter/version'
-require 'simplecov_linter_formatter/result_formatter'
-require 'simplecov_linter_formatter/source_file_text_formatter'
-require 'simplecov_linter_formatter/text_result_exporter'
-require 'simplecov_linter_formatter/text_lines_converter'
-require 'simplecov_linter_formatter/json_result_exporter'
+require 'simplecov_linter_formatter/formatters/result_formatter'
+require 'simplecov_linter_formatter/formatters/source_file_formatter'
+require 'simplecov_linter_formatter/formatters/text_lines_formatter'
+require 'simplecov_linter_formatter/exporters/text_result_exporter'
+require 'simplecov_linter_formatter/exporters/json_result_exporter'
 
 module SimpleCovLinterFormatter
   FILENAME = 'coverage.linter.txt'

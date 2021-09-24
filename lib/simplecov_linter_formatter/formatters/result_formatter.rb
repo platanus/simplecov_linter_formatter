@@ -18,7 +18,7 @@ module SimpleCovLinterFormatter
     private
 
     def format_source_file(source_file)
-      source_file_formatter = SourceFileTextFormatter.new(source_file)
+      source_file_formatter = SourceFileFormatter.new(source_file)
       source_file_formatter.format
     end
   end

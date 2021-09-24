@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe SimpleCovLinterFormatter::SourceFileTextFormatter do
+describe SimpleCovLinterFormatter::SourceFileFormatter do
   let(:line1) do
     instance_double(
       "SimpleCov::SourceFile::Line",

@@ -1,5 +1,5 @@
 module SimpleCovLinterFormatter
-  class SourceFileTextFormatter
+  class SourceFileFormatter
     FILE_COLUMN = 1
 
     def initialize(source_file)

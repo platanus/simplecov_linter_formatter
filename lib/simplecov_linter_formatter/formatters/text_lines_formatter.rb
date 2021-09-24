@@ -1,10 +1,10 @@
 module SimpleCovLinterFormatter
-  class TextLinesConverter
+  class TextLinesFormatter
     def initialize(lines)
       @lines = lines
     end
 
-    def convert
+    def format
       {
         RSpec: {
           coverage: group_lines_by_file

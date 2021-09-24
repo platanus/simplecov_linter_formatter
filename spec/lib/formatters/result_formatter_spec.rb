@@ -10,7 +10,7 @@ describe SimpleCovLinterFormatter::ResultFormatter do
 
   let(:file1_formatter) do
     instance_double(
-      "SimpleCovLinterFormatter::SourceFileTextFormatter",
+      "SimpleCovLinterFormatter::SourceFileFormatter",
       format: file1_formatter_response
     )
   end
@@ -24,7 +24,7 @@ describe SimpleCovLinterFormatter::ResultFormatter do
 
   let(:file2_formatter) do
     instance_double(
-      "SimpleCovLinterFormatter::SourceFileTextFormatter",
+      "SimpleCovLinterFormatter::SourceFileFormatter",
       format: file2_formatter_response
     )
   end
@@ -42,7 +42,7 @@ describe SimpleCovLinterFormatter::ResultFormatter do
   end
 
   before do
-    allow(SimpleCovLinterFormatter::SourceFileTextFormatter).to receive(:new)
+    allow(SimpleCovLinterFormatter::SourceFileFormatter).to receive(:new)
       .and_return(file1_formatter, file2_formatter)
   end
 
