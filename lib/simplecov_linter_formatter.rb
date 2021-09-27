@@ -22,7 +22,7 @@ module SimpleCovLinterFormatter
 
   def self.scope=(value)
     if !SCOPES.include?(value)
-      raise "Invalid scope. Must be one of: #{SCOPES.map(&:to_s).join(", ")}"
+      raise "Invalid scope. Must be one of: #{SCOPES.map(&:to_s).join('', '')}"
     end
 
     @scope = value

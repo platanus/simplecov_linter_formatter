@@ -5,22 +5,58 @@
 
 Linter formatter for SimpleCov code coverage tool
 
+<img src="./docs/assets/not-covered.png" witdh="300" />
+<img src="./docs/assets/partial-cov.png" witdh="300" />
+<img src="./docs/assets/covered.png" witdh="300" />
+
 ## Installation
 
-Add to your Gemfile:
+- Install [reviewdog](https://github.com/reviewdog/reviewdog)
 
-```ruby
-gem 'simplecov'
-gem 'simplecov_linter_formatter'
-```
+  ```bash
+  brew install reviewdog/tap/reviewdog
+  ```
 
-```bash
-bundle install
-```
+- Install [VSCode SimpleCov plugin](https://github.com/anykeyh/simplecov-vscode)
+
+  You need to configure `SimpleCovLinterFormatter.json_filename = '.resultset.json'` to use the extension's default configuration.
+  If you want yo keep the `.resultset.json` file intact you must change the plugin's "Path" option to point another file.
+
+- Add to your Gemfile:
+
+    ```ruby
+    gem 'simplecov'
+    gem 'simplecov_linter_formatter'
+    ```
+
+    ```bash
+    bundle install
+    ```
 
 ## Usage
 
-TODO
+Add the formatter to your `spec/spec_helper.rb`.
+
+```ruby
+require 'simplecov'
+require 'simplecov_linter_formatter'
+
+SimpleCovLinterFormatter.json_filename = '.resultset.json'
+SimpleCovLinterFormatter.scope = :all
+
+SimpleCov.start 'rails' do
+  # ...
+
+  formatter SimpleCov::Formatter::MultiFormatter.new(
+    [
+      SimpleCov::Formatter::LinterFormatter,
+      SimpleCov::Formatter::HTMLFormatter
+    ]
+  )
+end
+```
+
+If you configure `SimpleCovLinterFormatter.scope = :own_changes` instead of `:all` you will see coverage warnings related to your changes only (it uses `git diff`).
 
 ## Testing
 

@@ -8,7 +8,7 @@ describe SimpleCovLinterFormatter::TextLinesFormatter do
       "file1.rb:2:1:never-2",
       "file2.rb:1:1:missed-4",
       "file2.rb:2:1:covered-4",
-      "file2.rb:4:1:missed-4",
+      "file2.rb:4:1:missed-4"
     ]
   end
 

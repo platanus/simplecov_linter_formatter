@@ -2,19 +2,19 @@ require "spec_helper"
 
 describe SimpleCovLinterFormatter::TextLinesFilter do
   let(:lines) do
-    [
-      "line1",
-      "line2",
-    ]
+    %w{
+      line1
+      line2
+    }
   end
 
   let(:filtered_lines) { "filtered_line1\nfiltered_line2" }
 
   let(:expected_result) do
-    [
-      "filtered_line1",
-      "filtered_line2",
-    ]
+    %w{
+      filtered_line1
+      filtered_line2
+    }
   end
 
   before do
