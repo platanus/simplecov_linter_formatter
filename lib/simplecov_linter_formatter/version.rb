@@ -1,3 +1,3 @@
-module SimplecovLinterFormatter
+module SimpleCovLinterFormatter
   VERSION = "0.1.0"
 end

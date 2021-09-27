@@ -4,7 +4,7 @@ require "simplecov_linter_formatter/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "simplecov_linter_formatter"
-  spec.version       = SimplecovLinterFormatter::VERSION
+  spec.version       = SimpleCovLinterFormatter::VERSION
   spec.authors       = ["Platanus", "Leandro Segovia"]
   spec.email         = ["rubygems@platan.us", "leandro@platan.us"]
   spec.homepage      = "https://github.com/platanus/simplecov_linter_formatter"
@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec_junit_formatter"
   spec.add_development_dependency "rubocop", "~> 1.9"
   spec.add_development_dependency "rubocop-rails"
+  spec.add_development_dependency "simplecov", "~> 0.21"
 end
