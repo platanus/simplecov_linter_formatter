@@ -14,7 +14,11 @@ module SimpleCovLinterFormatter
     def filter_result
       return "" if text_content == ""
 
-      `echo "#{text_content}" | reviewdog -efm="%f:%l:%c:%m" -diff="git diff"`
+      `echo "#{text_content}" | reviewdog -efm="#{efm_param}" -diff="git diff"`
+    end
+
+    def efm_param
+      %w{%f %l %c %m}.join(SimpleCovLinterFormatter::LINE_SECTIONS_DIVIDER)
     end
 
     def text_content

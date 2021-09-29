@@ -3,13 +3,13 @@ require "spec_helper"
 describe SimpleCovLinterFormatter::TextLinesFormatter do
   let(:command_name) { "RSpec" }
   let(:lines) do
-    [
-      "file1.rb:1:1:missed-2",
-      "file1.rb:2:1:never-2",
-      "file2.rb:1:1:missed-4",
-      "file2.rb:2:1:covered-4",
-      "file2.rb:4:1:missed-4"
-    ]
+    %w{
+      file1.rb:1:1:missed-2-66.0
+      file1.rb:2:1:never-2-50.0
+      file2.rb:1:1:missed-4-50.0
+      file2.rb:2:1:covered-4-50.0
+      file2.rb:4:1:missed-4-50.0
+    }
   end
 
   def result

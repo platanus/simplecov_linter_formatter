@@ -7,6 +7,8 @@ require 'simplecov_linter_formatter/text_lines_filter'
 
 module SimpleCovLinterFormatter
   SCOPES = [:all, :own_changes]
+  MSG_DIVIDER = "-"
+  LINE_SECTIONS_DIVIDER = ":"
 
   def self.json_filename=(value)
     @json_filename = value
