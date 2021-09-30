@@ -19,14 +19,9 @@ module SimpleCovLinterFormatter
       result = {}
 
       @lines.each do |line|
-        file_name, line_number, _column, status_lines_count = line.split(
-          SimpleCovLinterFormatter::LINE_SECTIONS_DIVIDER
-        )
-        status, lines_count, _percentage = status_lines_count.split(
-          SimpleCovLinterFormatter::MSG_DIVIDER
-        )
-        result[file_name] ||= { lines: [nil] * lines_count.to_i }
-        result[file_name][:lines][line_number.to_i - 1] = status.to_sym == :missed ? 0 : nil
+        file = SimpleCovLinterFormatter::FileLine.new(line)
+        result[file.file_name] ||= { lines: [nil] * file.lines_count }
+        result[file.file_name][:lines][file.line_number_idx] = file.status == :missed ? 0 : nil
       end
 
       result

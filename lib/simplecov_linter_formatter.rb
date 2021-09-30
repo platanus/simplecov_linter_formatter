@@ -1,28 +1,30 @@
 require 'simplecov_linter_formatter/version'
+require 'simplecov_linter_formatter/file_line'
 require 'simplecov_linter_formatter/formatters/result_formatter'
 require 'simplecov_linter_formatter/formatters/source_file_formatter'
 require 'simplecov_linter_formatter/formatters/text_lines_formatter'
 require 'simplecov_linter_formatter/exporters/json_result_exporter'
 require 'simplecov_linter_formatter/text_lines_filter'
+require 'simplecov_linter_formatter/summary_builder'
 
 module SimpleCovLinterFormatter
+  extend self
+
   SCOPES = [:all, :own_changes]
   MSG_DIVIDER = "-"
   LINE_SECTIONS_DIVIDER = ":"
 
-  def self.json_filename=(value)
-    @json_filename = value
-  end
+  attr_writer :json_filename
 
-  def self.json_filename
+  def json_filename
     @json_filename || 'coverage.linter.json'
   end
 
-  def self.cover_all?
+  def cover_all?
     scope == :all
   end
 
-  def self.scope=(value)
+  def scope=(value)
     if !SCOPES.include?(value)
       raise "Invalid scope. Must be one of: #{SCOPES.map(&:to_s).join('', '')}"
     end
@@ -30,8 +32,12 @@ module SimpleCovLinterFormatter
     @scope = value
   end
 
-  def self.scope
+  def scope
     @scope || :all
+  end
+
+  def setup
+    yield self
   end
 end
 
@@ -40,6 +46,7 @@ module SimpleCov
     class LinterFormatter
       def format(simplecov_result)
         text_lines = get_text_lines(simplecov_result)
+        show_coverage_summary(text_lines)
         hash_result = format_text_lines(simplecov_result.command_name, text_lines)
         export_to_json(hash_result)
         nil
@@ -52,6 +59,12 @@ module SimpleCov
         return text_lines if SimpleCovLinterFormatter.cover_all?
 
         filter_text_lines(text_lines)
+      end
+
+      def show_coverage_summary(text_lines)
+        return if SimpleCovLinterFormatter.cover_all?
+
+        puts(SimpleCovLinterFormatter::SummaryBuilder.new(text_lines).build)
       end
 
       def filter_text_lines(text_lines)
