@@ -63,6 +63,21 @@ describe SimpleCov::Formatter::LinterFormatter do
     expect(summary_builder).not_to have_received(:build)
   end
 
+  context "with enabled summary" do
+    before do
+      SimpleCovLinterFormatter.summary_enabled = true
+    end
+
+    it do
+      format
+
+      expect(SimpleCovLinterFormatter::SummaryBuilder).to have_received(:new)
+        .with(text_lines).once
+
+      expect(summary_builder).to have_received(:build).with(no_args).once
+    end
+  end
+
   context "with :own_changes scope" do
     before do
       SimpleCovLinterFormatter.scope = :own_changes
@@ -77,9 +92,6 @@ describe SimpleCov::Formatter::LinterFormatter do
       expect(SimpleCovLinterFormatter::TextLinesFilter).to have_received(:new)
         .with(text_lines).once
 
-      expect(SimpleCovLinterFormatter::SummaryBuilder).to have_received(:new)
-        .with(filtered_text_lines).once
-
       expect(SimpleCovLinterFormatter::TextLinesFormatter).to have_received(:new)
         .with(command_name, filtered_text_lines).once
 
@@ -93,7 +105,6 @@ describe SimpleCov::Formatter::LinterFormatter do
       expect(text_lines_formatter).to have_received(:format).with(no_args).once
       expect(json_result_exporter).to have_received(:export).with(no_args).once
       expect(text_lines_filter).to have_received(:filter).with(no_args).once
-      expect(summary_builder).to have_received(:build).with(no_args).once
     end
   end
 end

@@ -1,3 +1,5 @@
+require 'rainbow'
+
 require 'simplecov_linter_formatter/version'
 require 'simplecov_linter_formatter/file_line'
 require 'simplecov_linter_formatter/formatters/result_formatter'
@@ -11,29 +13,73 @@ module SimpleCovLinterFormatter
   extend self
 
   SCOPES = [:all, :own_changes]
+  SORTING_MODES = [:coverage, :alphabet]
   MSG_DIVIDER = "-"
   LINE_SECTIONS_DIVIDER = ":"
 
-  attr_writer :json_filename
+  attr_writer(
+    :json_filename,
+    :summary_covered_bg_color,
+    :summary_not_covered_bg_color,
+    :summary_text_color,
+    :summary_enabled_bg,
+    :summary_enabled
+  )
 
   def json_filename
     @json_filename || 'coverage.linter.json'
   end
 
-  def cover_all?
-    scope == :all
-  end
-
   def scope=(value)
-    if !SCOPES.include?(value)
-      raise "Invalid scope. Must be one of: #{SCOPES.map(&:to_s).join('', '')}"
+    if !SCOPES.include?(value.to_sym)
+      raise "Invalid scope. Must be one of: #{SCOPES.map(&:to_s).join(', ')}"
     end
 
     @scope = value
   end
 
   def scope
-    @scope || :all
+    (@scope || :all).to_sym
+  end
+
+  def cover_all?
+    scope == :all
+  end
+
+  def summary_enabled
+    !!@summary_enabled
+  end
+
+  def summary_files_sorting=(value)
+    if !SORTING_MODES.include?(value.to_sym)
+      raise "Invalid summary_files_sorting. Must be one of: #{SORTING_MODES.map(&:to_s).join(', ')}"
+    end
+
+    @summary_files_sorting = value
+  end
+
+  def summary_files_sorting
+    (@summary_files_sorting || :coverage).to_sym
+  end
+
+  def summary_coverage_sorting?
+    summary_files_sorting == :coverage
+  end
+
+  def summary_enabled_bg
+    !!@summary_enabled_bg
+  end
+
+  def summary_covered_bg_color
+    (@summary_covered_bg_color || :darkgreen).to_sym
+  end
+
+  def summary_not_covered_bg_color
+    (@summary_not_covered_bg_color || :firebrick).to_sym
+  end
+
+  def summary_text_color
+    (@summary_text_color || :white).to_sym
   end
 
   def setup
@@ -62,7 +108,7 @@ module SimpleCov
       end
 
       def show_coverage_summary(text_lines)
-        return if SimpleCovLinterFormatter.cover_all?
+        return unless SimpleCovLinterFormatter.summary_enabled
 
         puts(SimpleCovLinterFormatter::SummaryBuilder.new(text_lines).build)
       end
