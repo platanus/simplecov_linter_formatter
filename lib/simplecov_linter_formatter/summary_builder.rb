@@ -1,5 +1,7 @@
 module SimpleCovLinterFormatter
   class SummaryBuilder
+    PERCENT_TEXT_SIZE = 3
+
     def initialize(lines)
       @lines = lines
       @largest_file_name = 0
@@ -7,6 +9,35 @@ module SimpleCovLinterFormatter
     end
 
     def build
+      body = build_body
+      return body if body == ""
+
+      "#{build_title}\n#{body}#{divider}"
+    end
+
+    private
+
+    def build_title
+      "SimpleCov Report - #{build_coverage_title}:\n#{divider}"
+    end
+
+    def divider
+      '-' * report_width
+    end
+
+    def report_width
+      @largest_file_name + @largest_percentage + PERCENT_TEXT_SIZE
+    end
+
+    def build_coverage_title
+      if SimpleCovLinterFormatter.cover_all?
+        return "Total Coverage"
+      end
+
+      "Own Changes"
+    end
+
+    def build_body
       result = ""
 
       files.each do |file|
@@ -15,8 +46,6 @@ module SimpleCovLinterFormatter
 
       result
     end
-
-    private
 
     def files
       unique_files = []
@@ -54,7 +83,7 @@ module SimpleCovLinterFormatter
         :summary_covered_bg_color
       )
       not_covered_text = colorize_text(
-        file_name[covered_size..],
+        file_name[covered_size..-1],
         :summary_not_covered_bg_color
       )
       "#{build_percentage_output(file)} #{covered_text}#{not_covered_text}"
