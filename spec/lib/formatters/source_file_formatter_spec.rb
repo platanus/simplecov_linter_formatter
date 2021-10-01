@@ -33,10 +33,24 @@ describe SimpleCovLinterFormatter::SourceFileFormatter do
     ]
   end
 
+  let(:line_stats) do
+    instance_double(
+      "SimpleCov::CoverageStatistics",
+      percent: 66.0
+    )
+  end
+
+  let(:stats) do
+    {
+      line: line_stats
+    }
+  end
+
   let(:source_file) do
     instance_double(
       "SimpleCov::SourceFile",
       filename: "file.rb",
+      coverage_statistics: stats,
       lines: lines
     )
   end
@@ -46,11 +60,11 @@ describe SimpleCovLinterFormatter::SourceFileFormatter do
   end
 
   let(:expected_lines) do
-    [
-      "file.rb:1:1:covered-3",
-      "file.rb:2:1:never-3",
-      "file.rb:5:1:missed-3"
-    ]
+    %w{
+      file.rb:1:1:covered-3-66.0
+      file.rb:2:1:never-3-66.0
+      file.rb:5:1:missed-3-66.0
+    }
   end
 
   it { expect(format).to eq(expected_lines) }

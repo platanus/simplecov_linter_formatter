@@ -58,6 +58,41 @@ end
 
 If you configure `SimpleCovLinterFormatter.scope = :own_changes` instead of `:all` you will see coverage warnings related to your changes only (it uses `git diff`).
 
+### Summary Report
+
+- Turn on the on screen report with option: `SimpleCovLinterFormatter.summary_enabled = true`
+- Scope variation will affect the report:
+  - `SimpleCovLinterFormatter.scope = :all`
+
+    <img src="./docs/assets/all-summary.png" witdh="300" />
+
+  - `SimpleCovLinterFormatter.scope = :own_changes`
+
+    <img src="./docs/assets/own-changes-summary.png" witdh="300" />
+
+- Sort by `:alphabet` or, the default, `:coverage` option with `SimpleCovLinterFormatter.summary_files_sorting = :alphabet`
+
+  <img src="./docs/assets/sorted-summary.png" witdh="300" />
+
+- Change the look of the report:
+  - Turn off the background with `SimpleCovLinterFormatter.summary_enabled_bg = false`
+
+    <img src="./docs/assets/no-bg-summary.png" witdh="300" />
+
+  - Change colors:
+
+    ```ruby
+    SimpleCovLinterFormatter.setup do |config|
+      config.summary_enabled_bg = true # you need enabled background
+      config.summary_covered_bg_color = :lightblue
+      config.summary_not_covered_bg_color = :pink
+      config.summary_text_color = :black
+    end
+    ```
+
+    <img src="./docs/assets/colors-summary.png" witdh="300" />
+
+
 ## Testing
 
 To run the specs you need to execute, **in the root path of the gem**, the following command:
