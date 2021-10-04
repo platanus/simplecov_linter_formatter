@@ -5,9 +5,21 @@
 
 Linter formatter for SimpleCov code coverage tool
 
-<img src="./docs/assets/not-covered.png" witdh="300" />
-<img src="./docs/assets/partial-cov.png" witdh="300" />
-<img src="./docs/assets/covered.png" witdh="300" />
+***Note: To learn more about SimpleCov, check out the main repo at [https://github.com/simplecov-ruby/simplecov](https://github.com/colszowka/simplecov)***
+
+This formatter has two features:
+
+1) It generates a json file to feed the [VSCode SimpleCov plugin](https://github.com/anykeyh/simplecov-vscode).
+
+   The plugin uses by default the json file produced by simplecov but, with this gem, we can filter the file to show code coverage related to our changes.
+
+   <img src="./docs/assets/not-covered.png" witdh="300" />
+   <img src="./docs/assets/partial-cov.png" witdh="300" />
+   <img src="./docs/assets/covered.png" witdh="300" />
+
+2) It shows a code coverage report on screen.
+
+   <img src="./docs/assets/report-example.png" witdh="300" />
 
 ## Installation
 
@@ -16,6 +28,8 @@ Linter formatter for SimpleCov code coverage tool
   ```bash
   brew install reviewdog/tap/reviewdog
   ```
+
+  > You can avoid this step and `git status` will be used to filter results instead.
 
 - Install [VSCode SimpleCov plugin](https://github.com/anykeyh/simplecov-vscode)
 
@@ -41,8 +55,10 @@ Add the formatter to your `spec/spec_helper.rb`.
 require 'simplecov'
 require 'simplecov_linter_formatter'
 
-SimpleCovLinterFormatter.json_filename = '.resultset.json'
-SimpleCovLinterFormatter.scope = :all
+SimpleCovLinterFormatter.setup do |config|
+  config.json_filename = '.resultset.json'
+  config.scope = :all
+end
 
 SimpleCov.start 'rails' do
   # ...

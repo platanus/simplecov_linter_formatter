@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Unreleased
 
+#### Added
+
+* Add on screen summary report.
+* Use `git diff` if `reviewdog` is not installed.
+
 ### v0.1.0
 
 * Initial release.
