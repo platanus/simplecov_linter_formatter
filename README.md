@@ -23,14 +23,6 @@ This formatter has two features:
 
 ## Installation
 
-- Install [reviewdog](https://github.com/reviewdog/reviewdog)
-
-  ```bash
-  brew install reviewdog/tap/reviewdog
-  ```
-
-  > You can avoid this step and `git status` will be used to filter results instead.
-
 - Install [VSCode SimpleCov plugin](https://github.com/anykeyh/simplecov-vscode)
 
   You need to configure `SimpleCovLinterFormatter.json_filename = '.resultset.json'` to use the extension's default configuration.
