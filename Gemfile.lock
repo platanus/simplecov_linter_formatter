@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simplecov_linter_formatter (0.2.0)
+    simplecov_linter_formatter (0.3.0)
       rainbow
 
 GEM
